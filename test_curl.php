@@ -1,5 +1,24 @@
+ <?php
+    // Create a curl handle
+    $ch = curl_init('http://www.yahoo.com/');
 
-<h1>Search result</h1>
+    // Execute
+    curl_exec($ch);
+
+    // Check if any error occured
+    if(!curl_errno($ch))
+    {
+     $info = curl_getinfo($ch);
+
+     echo 'Took ' . $info['total_time'] . ' seconds to send a request to ' . $info['url'];
+    }else{
+    	echo "It is ok.";
+    }
+
+    // Close handle
+    curl_close($ch);
+?>
+
 <?php
 
 $module = "SalesOrders";
@@ -90,12 +109,3 @@ foreach($result_xml as $row){
 }
 
 ?> 
-
-</h4>
-
-<br>
-<br>
-<h4><?php //print_r($response->result->Leads->row[0]);?></h4>
-<br>
-<br>
-<h4><?php //echo $response->result->Leads->row[0]->FL[3]->value;?></h4>

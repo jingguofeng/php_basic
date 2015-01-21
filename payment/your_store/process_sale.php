@@ -40,6 +40,7 @@ if ($METHOD_TO_USE == "AIM") {
 		
         )
     );
+    
     $response = $transaction->authorizeAndCapture();
     if ($response->approved) {
         // Transaction approved! Do your logic here.
