@@ -2,6 +2,7 @@
 
 require_once 'coffee_store_settings.php';
 
+
 if ($METHOD_TO_USE == "AIM") {
     $transaction = new AuthorizeNetAIM;
     $transaction->setSandbox(AUTHORIZENET_SANDBOX);
