@@ -2,12 +2,41 @@
 <h1>Search result</h1>
 <?php
 
+include "config.php";
 $module = "SalesOrders";
 $method = "searchRecords";
 
+$errors = array();
 
 
-function get_data($module,$method){
+
+function record_not_found($errno, $errstr, $errfile, $errline, $errcontext){
+	$errors[] = "<b>Error: </b>[$erron] $errstr <br>";
+	echo "<b>Error: </b>[$erron] $errstr <br>";
+	echo "Ending Script";
+	$errors[] = "<b>Error File: </b> $errfile <br>";
+	$errors[] = "<b>Error Line: </b> $errline <br>";
+	$errors[] = "<b>Error Context: </b> $errcontext <br>";
+	$error_msg = "<h1>An error occurred, Please Fix Me!</h1><br>".
+				 "<b>Error: </b>[$erron] $errstr <br>".
+				 "<b>Error File: </b> $errfile <br>".
+				 "<b>Error Line: </b> $errline <br>".
+				 "<b>Error Context: </b> $errcontext <br>";
+	$type = 1;
+	$destination = "everjgfeng@gmail.com";
+	// mime type to display message in HTML
+	$headers = "From: error-noreply@promodealer.com\r\n";
+	$headers .= "MIME-Version: 1.0\r\n";
+	$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+	error_log($error_msg,$type,$destination,$headers);
+	header('Location: error_page.php?error_code='.$errno);
+}
+
+set_error_handler("record_not_found");
+
+
+
+function get_data($module,$method,$cond1){   //return the simple xml object of zoho crm result
 	//header("Content-type: application/xml");
     $token="7cc2b781a595585bd242ec1a366b0aa7";
     
@@ -21,7 +50,7 @@ function get_data($module,$method){
     
     //$param= "authtoken=".$token."&scope=crmapi";
     
-    $param= "authtoken=".$token."&scope=crmapi"."&criteria=(SO No.: 1619041)";
+    $param= "authtoken=".$token."&scope=crmapi"."&criteria=(SO No.: ".$cond1.")";
     
     //use php curl
     $ch = curl_init();
@@ -42,12 +71,41 @@ function get_data($module,$method){
     //fclose($myfile);
     
     //var_dump($result);
-    return $result;
+    
+    $response1 = simplexml_load_string($result,'SimpleXMLElement',LIBXML_NOCDATA);
+    
+    
+    if($response1->children()->getName() == "result"){
+    	
+    	//Get all the row value
+    	switch($module){  
+    			
+    		case "Leads":
+    			$result_xml = $response1->result->Leads->row;
+    			break;
+    		case "SalesOrders":
+    			$result_xml = $response1->result->SalesOrders->row;
+    			break;
+    		default:
+    			echo "Error: Can't find module.";
+    	}
+    	
+    	return $result_xml;    //return simple xml object
+    
+    }elseif($response1->children()->getName() == "nodata"){   	
+    	return 0;
+    }else{
+    	trigger_error("An error",E_USER_WARNING);
+    }
+    
+    
+    
+    
 }
 
-	$kk = get_data($module,$method);
-	//$xml_data = uncdata($kk);
-	$response1 = simplexml_load_string($kk,'SimpleXMLElement',LIBXML_NOCDATA);
+	$kk = get_data($module,$method,$_POST['SO_id']);
+
+	
 
 ?>
 
@@ -58,6 +116,10 @@ function get_data($module,$method){
 //var_dump($kk);
 
 //var_dump($response1);
+//echo "<br>";
+// $response1->children()->getName();
+//echo "<br>";
+
 /*
 
 echo "<br>";
@@ -68,25 +130,17 @@ echo "<br>";
 echo $response1->result->Leads->row[0]->FL[3];
 */
 
-switch($module){
+if($kk){
 	
-	case "Leads": 
-		$result_xml = $response1->result->Leads->row;
-		break;
-	case "SalesOrders":
-		$result_xml = $response1->result->SalesOrders->row;
-		break;
-	default:
-		echo "Error: Can't find module.";
-}
 
-
-
-
-foreach($result_xml as $row){
-	foreach($row->FL as $en){
-		echo $en->attributes().": ".$en."<br>";
+	foreach($kk as $row){
+		foreach($row->FL as $en){
+			echo $en->attributes().": ".$en."<br>";
+		}
 	}
+
+}else{
+	echo "Can't find your account! Try again.";
 }
 
 ?> 
