@@ -1,0 +1,34 @@
+object(SimpleXMLElement)#1 (1) 
+{ 
+	["book"]=> array(4) {
+		[0]=> object(SimpleXMLElement)#5 (5) { 
+			["@attributes"]=> array(1) { ["category"]=> string(7) "COOKING" } 
+			["title"]=> string(16) "Everyday Italian"
+			["author"]=> string(19) "Giada De Laurentiis" 
+			["year"]=> string(4) "2005" 
+			["price"]=> string(5) "30.00" 
+		} 
+		[1]=> object(SimpleXMLElement)#4 (5) { 
+			["@attributes"]=> array(1) { ["category"]=> string(8) "CHILDREN" }
+			["title"]=> string(12) "Harry Potter" 
+			["author"]=> string(12) "J K. Rowling"
+			["year"]=> string(4) "2005"
+			["price"]=> string(5) "29.99" 
+		} 
+		[2]=> object(SimpleXMLElement)#3 (5) { 
+			["@attributes"]=> array(1) { ["category"]=> string(3) "WEB" } 
+			["title"]=> string(17) "XQuery Kick Start" 
+			["author"]=> string(14) "James McGovern" 
+			["year"]=> string(4) "2003"
+			["price"]=> string(5) "49.99" 
+		}
+		[3]=> object(SimpleXMLElement)#2 (5) { 
+			["@attributes"]=> array(1) { ["category"]=> string(3) "WEB" } 
+			["title"]=> string(12) "Learning XML" 
+			["author"]=> string(11) "Erik T. Ray" 
+			["year"]=> string(4) "2003" 
+			["price"]=> string(5) "39.95" 
+		} 
+	} 
+} 
+	

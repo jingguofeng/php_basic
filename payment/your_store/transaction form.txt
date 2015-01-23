@@ -1,0 +1,94 @@
+<?php
+/*
+*
+*
+    private $_all_aim_fields = array(
+	
+		//Authorization Information
+		"auth_code",
+		"trans_id",
+		"authentication_indicator", 
+		"allow_partial_auth",
+		"card_code",                 							//CCV
+		"cardholder_authentication_value",
+		"customer_ip",												//Customer IP
+	
+		//Payment Information
+		"card_num",												//Card Number
+		"exp_date",
+		"amount",                                                 	//Settlement Amount: 
+		
+		//Order Information
+		"invoice_num",                									//Invoice #
+		"description",												//Order Description
+		
+		//Customer Billing Information
+		"first_name",
+		"last_name",
+		"company",													//Billing company
+		"address",											//Billing address
+		"city",                                                      		//Billing city
+		"state",
+		"zip"
+		"country",														//Billing country
+		"phone",
+		"fax", 																//Billing Fax
+		"email",
+		
+		"cust_id",
+		"type",
+		
+		//Shipping Information
+        "ship_to_first_name",
+		"ship_to_last_name",	
+		"ship_to_company",
+		"ship_to_address",
+		"ship_to_city",
+		"ship_to_state",
+		"ship_to_zip",
+		"ship_to_country",		
+		
+		
+		//Additional Detail - Level 2 Data
+		"tax",
+		"freight",  
+		"duty",
+		"tax_exempt",
+		"po_num",
+		
+		
+		
+		
+        "split_tender_id",
+		"bank_aba_code",
+		"bank_acct_name",
+		"bank_acct_num",
+		"bank_acct_type",
+		"bank_check_number",
+		"bank_name",
+		"delim_char",
+		"delim_data",												
+        "duplicate_window",
+		"echeck_type",
+		"email_customer",
+        "encap_char",
+		"footer_email_receipt",                                                              
+		"header_email_receipt",
+		"line_item",
+        "login",
+		"method",
+		"recurring_billing",
+		"relay_response",
+		"test_request",
+		"tran_key",
+		
+		"version",
+		
+		
+        );
+*/
+
+*/
+
+
+?>
