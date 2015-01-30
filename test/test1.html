@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<SCRIPT TYPE="text/javascript">
+
+function popup(mylink, windowname)
+{
+if (! window.focus)return true;
+var href;
+if (typeof(mylink) == 'string')
+   href=mylink;
+else
+   href=mylink.href;
+window.open(href, windowname, 'width=400,height=200,scrollbars=yes');
+return false;
+}
+
+</SCRIPT>
+
+<style>
+.dim {
+    height:100%;
+    width:100%;
+    position:fixed;
+    left:0;
+    top:0;
+    z-index:1 !important;
+    background-color:black;
+    filter: alpha(opacity=75); /* internet explorer */
+    -khtml-opacity: 0.75;      /* khtml, old safari */
+      -moz-opacity: 0.75;      /* mozilla, netscape */
+           opacity: 0.75;      /* fx, safari, opera */
+}
+.dialog_wrapper {
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    z-index: 5;
+    display: block;
+}
+.dialog {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+}
+</style>
+
+</head>
+<body>
+<A 
+   HREF="popupbasic.html" 
+   onClick="return popup(this, 'notes')">my popup</A>
+   
+   <p>Normal Website content</p>
+<p>Normal Website content</p>
+<p>Normal Website content</p>
+<p>Normal Website content</p>
+<p>Normal Website content</p>
+<p>Normal Website content</p>
+
+<!-- The first DIV for creating an Overlay -->
+<div class="dim"  title="Event">
+</div>  
+
+<!-- The second div. Note, that the wrapper is only need to center the real dialog div -->
+<div class="dialog_wrapper">
+    <div class="dialog">Dialog Window</div>
+</div>
+</body>
+</html>

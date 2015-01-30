@@ -34,7 +34,13 @@ function record_not_found($errno, $errstr, $errfile, $errline, $errcontext){
 
 set_error_handler("record_not_found");
 
+//convert a xmlobject to an array
+function _xml2array ( $xmlObject, $out = array () ){
+	foreach ( (array) $xmlObject as $index => $node )
+		$out[$index] = ( is_object ( $node ) ) ? _xml2array ( $node ) : $node;
 
+	return $out;
+}
 
 function get_data($module,$method,$cond1){   //return the simple xml object of zoho crm result
 	//header("Content-type: application/xml");

@@ -34,7 +34,13 @@ function record_not_found($errno, $errstr, $errfile, $errline, $errcontext){
 
 set_error_handler("record_not_found");
 
+//convert a xmlobject to an array
+function _xml2array ( $xmlObject, $out = array () ){
+	foreach ( (array) $xmlObject as $index => $node )
+		$out[$index] = ( is_object ( $node ) ) ? _xml2array ( $node ) : $node;
 
+	return $out;
+}
 
 function get_data($module,$method,$cond1){   //return the simple xml object of zoho crm result
 	//header("Content-type: application/xml");
@@ -121,9 +127,16 @@ echo "<br>";
 echo "<br>";
 echo "<br>";
 $n = 1;
+
+echo count($products);
+
+echo "<br>";
 foreach($products as $product){
 	echo "<h3>Product No.".$n."</h3>";
-	
+	$abc = $product->xpath('//FL[@val="Product Details"]/product[@no="1"]/FL[@val="Product Id"]');
+	var_dump($abc);
+	echo($abc[0]->attributes());
+	echo($abc[0]);
 	echo $product->FL[1]->attributes().": ".$product->FL[1];
 	
 	//$name = $product->xpath('/FL[@val="Product Name"]');
@@ -145,7 +158,19 @@ $a = $kk->xpath('/response/result/SalesOrders/row/FL[@val="SO Number"]');
 
 var_dump($a);
 
+
+echo "<br>";
+echo "<br>";
+echo "<br>";
+
+$xmlarray = _xml2array($kk);
+
+var_dump($xmlarray);
+
+
+echo $xmlarray['result']['SalesOrders']['row']['FL'][0];
 ?>
+
 
 
 <h4>
